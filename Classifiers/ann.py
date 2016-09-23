@@ -14,19 +14,19 @@ if __name__ == '__main__':
     # get training and test data
     A1, Y, Ate, Yte = get_data()
 
-    for j in range(5000, 5001):
+    for j in range(1000, 1001):
         np.random.seed(1)
         eta = 0.1
         nh = j + 1
         # h(hidden) x m(input)
-        W1 = 2 * np.random.random((nh, 11250)) - 1
-        G1 = np.zeros((nh, 11250))
+        W1 = 2 * np.random.random((nh, int(11250/2))) - 1
+        G1 = np.zeros((nh, int(11250/2)))
 
         # t(output) x h
         W2 = 2 * np.random.random((4, nh)) - 1
         G2 = np.zeros((4, nh))
 
-        for i in range(1, 100):
+        for i in range(1, 5000):
             # expit(x) = 1 / (1 + exp(-x))
             eta = 1 / i
             A2 = expit(np.dot(W1, A1.T))

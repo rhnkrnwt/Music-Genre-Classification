@@ -3,7 +3,7 @@ from sklearn import svm, preprocessing
 from svm_arrange import get_data
 
 A1, Y, Ate, Yte = get_data()
-clf = svm.NuSVC()
+clf = svm.NuSVC(kernel='rbf')
 
 A1 = preprocessing.scale(A1)
 Ate = preprocessing.scale(Ate)
@@ -24,4 +24,7 @@ for p in prediction:
     if class_counter == 4:
         class_counter = 0
 
-print(mis)
+print("Pop accuracy: {0}%".format((1 - (mis[0]) / 30) * 100))
+print("Jazz accuracy: {0}%".format((1 - (mis[1]) / 30) * 100))
+print("Metal accuracy: {0}%".format((1 - (mis[2]) / 30) * 100))
+print("Classical accuracy: {0}%".format((1 - (mis[3]) / 30) * 100))

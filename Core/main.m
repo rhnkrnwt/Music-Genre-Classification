@@ -9,7 +9,7 @@ nCol = 750;
 dataset = zeros(nRow*400,nCol); % Fiternal dataset
 
 % easily add genres, increment number of rows by 15 * 100
-genre = dir('pop/*.au'); 
+genre = dir('pop/*.au');
 for iter = 1:length(genre)
     startIndex = 1+(iter-1)*nRow;
     endIndex = startIndex + nRow-1;

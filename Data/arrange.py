@@ -1,21 +1,19 @@
 import csv
 def get_data():
+    num = 4
     with open('dataset.csv', 'r') as f:
         lines = csv.reader(f)
         dataset = list(lines)
 
-    d = []
-    for i in xrange(4):
-        d.append([])
-    for i, j in enumerate(dataset):
-        if i < 1500:
-            d[0].append(j)
-        elif i < 3000:
-            d[1].append(j)
-        elif i < 4500:
-            d[2].append(j)
-        else:
-           d[3].append(j)
 
-    return d
+    D = []
+    for i in range(0,len(dataset),15):
+        tmp1 = dataset[i:i+15]
+        tmp2 = [k for l in tmp1 for k in l]
+        D.append(tmp2)
 
+    F = [[]]*num
+    for i in range(num):
+        F[i] = D[i*100:(i+1)*100]
+
+    return F

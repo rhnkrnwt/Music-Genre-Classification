@@ -3,10 +3,11 @@ import numpy as np
 
 def get_data():
     num = 4
-    with open('../Data/dataset.csv', 'r') as f:
+    with open('../Data/dataset2.csv', 'r') as f:
         lines = csv.reader(f)
-        dataset = list(lines)
+        F = list(lines)
 
+    """
     half_dataset = []
     for i in dataset:
         half_dataset.append(i[0:750:2])
@@ -21,25 +22,43 @@ def get_data():
     F = [[]]*num
     for i in range(num):
         F[i] = D[i*100:(i+1)*100]
+    """
     for i in F:
-        for j in i:
-            for k in range(len(j)):
-                try:
-                    j[k] = float(j[k])
-                except:
-                    pass
+        for k in range(len(i)):
+            try:
+                i[k] = float(i[k])
+            except:
+                pass
 
-    F0 = np.array(F[0])
-    F1 = np.array(F[1])
-    F2 = np.array(F[2])
-    F3 = np.array(F[3])
+    bias = np.ones((280, 1))
+    F0 = np.array(F[0:100])
+    F1 = np.array(F[100:200])
+    F2 = np.array(F[200:300])
+    F3 = np.array(F[300:400])
+    # print(F0.shape, F1.shape, F2.shape, F3.shape)
     A = np.array([F0[0, :], F1[0, :], F2[0, :], F3[0, :]])
-    Y = np.array([[0, 0, 0, 1], [0, 1, 0, 0], [0, 0, 1, 1],
+    Y = np.array([[0, 0, 0, 1], [0, 0, 0, 0], [1, 1, 1, 1],
                   [1, 0, 0, 0]])
     for i in range(1, 70):
         A = np.append(A, [F0[i, :], F1[i, :], F2[i, :], F3[i, :]], axis=0)
         Y = np.append(Y, [[0, 0, 0, 1], [0, 1, 0, 0], [0, 0, 1, 1],
                       [1, 0, 0, 0]], axis=0)
+    # print(A.shape)
+    # print(bias.shape)
+    # A = np.concatenate((A, bias), axis=1)
+    # print(A.shape)
+
+    Ate_pop = np.array([F0[70, :]])
+    Yte_pop = np.array([[0, 0, 0, 1]])
+
+    Ate_jazz = np.array([F1[70, :]])
+    Yte_jazz = np.array([[0, 1, 0, 0]])
+
+    Ate_metal = np.array([F2[70, :]])
+    Yte_metal = np.array([[0, 0, 1, 1]])
+
+    Ate_classical = np.array([F3[70, :]])
+    Yte_classical = np.array([[1, 0, 0, 0]])
 
     Ate = np.array([F0[70, :], F1[70, :], F2[70, :], F3[70, :]])
     Yte = np.array([[0, 0, 0, 1], [0, 1, 0, 0], [0, 0, 1, 1],
@@ -50,4 +69,22 @@ def get_data():
         Yte = np.append(Yte, [[0, 0, 0, 1], [0, 1, 0, 0], [0, 0, 1, 1],
                       [1, 0, 0, 0]], axis=0)
 
-    return A, Y, Ate, Yte
+        Ate_pop = np.append(Ate_pop, [F0[i, :]], axis=0)
+        Yte_pop = np.append(Yte_pop, [[0, 0, 0, 1]], axis=0)
+
+        Ate_jazz = np.append(Ate_jazz, [F1[i, :]], axis=0)
+        Yte_jazz = np.append(Yte_jazz, [[0, 1, 0, 0]], axis=0)
+
+        Ate_metal = np.append(Ate_metal, [F2[i, :]], axis=0)
+        Yte_metal = np.append(Yte_metal, [[0, 0, 1, 1]], axis=0)
+
+        Ate_classical = np.append(Ate_classical, [F3[i, :]], axis=0)
+        Yte_classical = np.append(Yte_classical, [[1, 0, 0, 0]], axis=0)
+
+
+
+    bias = np.ones((120, 1))
+    # Ate = np.concatenate((Ate, bias), axis=1)
+
+    return (A, Y, Ate, Yte, Ate_pop, Yte_pop, Ate_jazz, Yte_jazz, Ate_metal,
+            Yte_metal, Ate_classical, Yte_classical)

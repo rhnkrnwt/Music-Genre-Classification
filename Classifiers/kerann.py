@@ -12,15 +12,15 @@ Ate = preprocessing.scale(Ate)
 np.random.seed(7)
 
 model = Sequential()
-model.add(Dense(20, input_dim=135, init='uniform', activation='relu'))
+model.add(Dense(30, input_dim=135, init='uniform', activation='relu'))
 for i in range(9):
-    model.add(Dense(20, init='uniform', activation='relu'))
+    model.add(Dense(30, init='uniform', activation='relu'))
 model.add(Dense(4, init='uniform', activation='sigmoid'))
 
 model.compile(loss='binary_crossentropy', optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(A1, Y, nb_epoch=56, batch_size=1)
+model.fit(A1, Y, nb_epoch=95, batch_size=1)
 
 print("")
 print("")

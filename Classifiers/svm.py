@@ -3,7 +3,7 @@ from sklearn import svm, preprocessing
 from svm_arrange import get_data
 
 A1, Y, Ate, Yte = get_data()
-clf = svm.NuSVC(kernel='rbf')
+clf = svm.NuSVC(kernel='rbf', nu=0.2)
 
 A1 = preprocessing.scale(A1)
 Ate = preprocessing.scale(Ate)

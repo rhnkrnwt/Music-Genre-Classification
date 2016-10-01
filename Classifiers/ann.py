@@ -1,46 +1,63 @@
 import numpy as np
 from scipy.special import expit
+from sklearn import preprocessing
 from functools import reduce
 from arrange import get_data
-
-
-def tr(x, y):
-    a = np.array([[0, 0, 0, 0]])
-    if y.all() == a.all():
-        return x + 1
-    return x
 
 if __name__ == '__main__':
     # get training and test data
     A1, Y, Ate, Yte = get_data()
+    A1 = preprocessing.scale(A1)
+    Ate = preprocessing.scale(Ate)
 
-    for j in range(1000, 1001):
-        np.random.seed(1)
-        eta = 0.1
-        nh = j + 1
-        # h(hidden) x m(input)
-        W1 = 2 * np.random.random((nh, int(11250/2))) - 1
-        G1 = np.zeros((nh, int(11250/2)))
 
-        # t(output) x h
-        W2 = 2 * np.random.random((4, nh)) - 1
-        G2 = np.zeros((4, nh))
+    for k in range(9, 10):
+        np.random.seed(7)
+        eta = 0.01
+        nh = [20] * 11
+        W = [0] * 11
+        G = [0] * 11
+        Ao = [0] * 11
+        d = [0] * 11
 
-        for i in range(1, 5000):
+        # h1(hidden) x m(input)
+        W[0] = 2 * np.random.random((nh[0], 136)) - 1
+        G[0] = np.zeros((nh[0], 136))
+
+        for i in range(1, 10):
+            W[i] = 2 * np.random.random((nh[i], nh[i - 1])) - 1
+            G[i] = np.zeros((nh[i], nh[i - 1]))
+
+
+        W[10] = 2 * np.random.random((4, nh[9])) - 1
+        G[10] = np.zeros((4, nh[9]))
+
+        for i in range(1, 10000):
             # expit(x) = 1 / (1 + exp(-x))
             eta = 1 / i
-            A2 = expit(np.dot(W1, A1.T))
-            A3 = expit(np.dot(W2, A2))
+            # A2
+            Ao[0] = expit(np.dot(W[0], A1.T))
 
-            d3 = A3 - Y.T
-            d2 = np.dot(W2.T, d3) * (A2 * (1 - A2))
+            for j in range(1, 11):
+                Ao[j] = expit(np.dot(W[j], Ao[j - 1]))
 
-            G2 = G2 + np.dot(d3, A2.T)
-            G1 = G1 + np.dot(d2, A1)
 
-            W2 = W2 - (eta * G2)
-            W1 = W1 - (eta * G1)
+            d[10] = Ao[10] - Y.T
 
+            for j in range(9, -1, -1):
+                d[j] = np.dot(W[j + 1].T, d[j + 1]) * (Ao[j] * (1 - Ao[j]))
+
+            for j in range(10, 0, -1):
+                # print(G[j].shape)
+                # print(d[j].shape)
+                # print(Ao[j-1].shape)
+                G[j] = G[j] + np.dot(d[j], Ao[j - 1].T)
+            G[0] = G[0] + np.dot(d[0], A1)
+
+            for j in range(1, 11):
+                W[j] = W[j] - (eta * G[j])
+
+        """
         corr = reduce(tr, np.rint(A3.T) - Y, 0)
         ratio = corr / Y.shape[0]
 
@@ -54,8 +71,14 @@ if __name__ == '__main__':
         ratio = corr / Yte.shape[0]
 
         print("Test accuracy: {0}%\n".format( ratio * 100))
-
-        print(np.rint(A3te.T))
+        """
+        diff = np.rint(Ao[10].T) - Y
+        count_correct = 0
+        print(diff)
+        for i in diff:
+            if np.array_equal(i, [0, 0, 0, 0]):
+                count_correct += 1
+        print(count_correct)
         """
         print('[')
         for i in range(W2.shape[0]):

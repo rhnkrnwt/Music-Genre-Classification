@@ -50,7 +50,7 @@ def KL_divergence(song1, song2):
 def KNN():
 	plotX.append([])
 	plotY.append([])
-	for k in range(10):
+	for k in range():
 		plotX[genre_pointer].append(k)
 		accuracy = 0
 		for i in range(genre_train):

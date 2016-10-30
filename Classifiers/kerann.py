@@ -5,7 +5,8 @@ from keras.layers import Dense
 from arrange import get_data
 
 A1, Y, Ate, Yte, Ate_pop, Yte_pop, Ate_jazz, Yte_jazz, Ate_metal,\
- Yte_metal, Ate_classical, Yte_classical = get_data()
+ Yte_metal, Ate_classical, Yte_classical, Ate_hiphop,\
+ Yte_hip = get_data()
 
 A1 = preprocessing.scale(A1)
 Ate = preprocessing.scale(Ate)
@@ -20,7 +21,7 @@ model.add(Dense(4, init='uniform', activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(A1, Y, nb_epoch=95, batch_size=1)
+model.fit(A1, Y, nb_epoch=50, batch_size=1)
 
 print("")
 print("")

@@ -2,11 +2,9 @@ import numpy as np
 from sklearn import preprocessing
 from keras.models import Sequential
 from keras.layers import Dense
-from arrange import get_data
+from total_arrange import get_data
 
-A1, Y, Ate, Yte, Ate_pop, Yte_pop, Ate_jazz, Yte_jazz, Ate_metal,\
-Yte_metal, Ate_classical, Yte_classical, Ate_hiphop,\
-Yte_hiphop = get_data()
+A1, Y, Ate, Yte = get_data('dataset3.csv', 4, 'hot')
 
 # print(A1[A1[:, 0] < -30])
 
@@ -24,7 +22,7 @@ model.add(Dense(4, init='uniform', activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(A1, Y, nb_epoch=50, batch_size=1)
+model.fit(A1, Y, nb_epoch=30, batch_size=1)
 
 print("")
 print("")

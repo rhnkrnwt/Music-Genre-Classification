@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 from sklearn.ensemble import RandomForestClassifier
-from arrange_dt4 import get_data
+from total_arrange import get_data
 
 
 def rf(md, A, Y, Ate, Yte):
@@ -11,8 +11,7 @@ def rf(md, A, Y, Ate, Yte):
     return clf.predict(Ate)
 
 if __name__ == '__main__':
-    A, Y, Ate, Yte, Ate_pop, Yte_pop, Ate_jazz, Yte_jazz, Ate_metal,\
-    Yte_metal, Ate_classical, Yte_classical = get_data()
+    A, Y, Ate, Yte = get_data('dataset4.csv', num=4)
 
     prediction = rf(int(sys.argv[1]), A, Y, Ate, Yte)
 

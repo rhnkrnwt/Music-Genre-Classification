@@ -1,5 +1,5 @@
 import numpy as np
-from arrange_dt import get_data
+from total_arrange import get_data
 from math import log2
 import decimal
 import pickle
@@ -100,7 +100,7 @@ def make_tree(A, max_depth=None):
                      tb=true_branch, fb=false_branch)
     return dnode(result=get_results(A))
 
-def printtree(tree, spacing=''):
+def print_tree(tree, spacing=''):
    # Is this a leaf node?
     if tree.result != None:
         print(str(tree.result))
@@ -108,9 +108,10 @@ def printtree(tree, spacing=''):
         print(str(tree.feature) + ':' + str(tree.val) + '? ')
         # Print the branches
         print(spacing + 'T->', end=" ")
-        printtree(tree.tb, spacing +'  ')
+        print_tree(tree.tb, spacing + '  ')
         print(spacing + 'F->', end=" ")
-        printtree(tree.fb, spacing +'  ')
+        print_tree(tree.fb, spacing + '  ')
+
 
 def classify_one(sample, tree):
     if tree.result != None:
@@ -126,9 +127,7 @@ def classify_one(sample, tree):
 
 
 if __name__ == '__main__':
-    A, Y, Ate, Yte, Ate_pop, Yte_pop, Ate_jazz, Yte_jazz, Ate_metal,\
-    Yte_metal, Ate_classical, Yte_classical, Ate_hiphop,\
-    Yte_hiphop = get_data()
+    A, Y, Ate, Yte = get_data('dataset4.csv', num=5)
 
     Y = Y.reshape(-1, 1)
     A = np.concatenate((A, Y), axis=1)
@@ -137,19 +136,20 @@ if __name__ == '__main__':
     # with open('d_tree.pickle', 'wb') as f:
     #     pickle.dump(tree, f)
     tree = None
-    with open('orig_tree.pickle', 'rb') as f:
+    with open('forest/d_tree0.pickle', 'rb') as f:
         tree = pickle.load(f)
 
-    printtree(tree)
+    print_tree(tree)
+    tru = 0
     for i in range(Ate.shape[0]):
         pred = (classify_one(Ate[i, :], tree))
         print(pred, Yte[i])
-        # for key, _ in pred.items():
-            # print("{0} {1}".format(int(key), Yte[i]))
-            # if int(key) == Yte[i]:
-            #     tru += 1
-            #     print(key)
-    # print(tru / Ate.shape[0])
+        for key, _ in pred.items():
+            print("{0} {1}".format(int(key), Yte[i]))
+            if int(key) == Yte[i]:
+                tru += 1
+                print(key)
+    print(tru / Ate.shape[0])
 
     # print(classify_one(Ate[0, :], tree))
     # print(Yte[0])

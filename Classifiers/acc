@@ -1,0 +1,218 @@
+(350,)
+(350,)
+0.05
+Pop accuracy: 83.33333333333334%
+Jazz accuracy: 86.66666666666667%
+Metal accuracy: 76.66666666666666%
+Classical accuracy: 73.33333333333334%
+Hiphop accuracy: 86.66666666666667%
+0.075
+Pop accuracy: 83.33333333333334%
+Jazz accuracy: 86.66666666666667%
+Metal accuracy: 76.66666666666666%
+Classical accuracy: 73.33333333333334%
+Hiphop accuracy: 86.66666666666667%
+0.1
+Pop accuracy: 80.0%
+Jazz accuracy: 86.66666666666667%
+Metal accuracy: 76.66666666666666%
+Classical accuracy: 73.33333333333334%
+Hiphop accuracy: 86.66666666666667%
+0.125
+Pop accuracy: 80.0%
+Jazz accuracy: 83.33333333333334%
+Metal accuracy: 80.0%
+Classical accuracy: 76.66666666666666%
+Hiphop accuracy: 90.0%
+0.15
+Pop accuracy: 76.66666666666666%
+Jazz accuracy: 80.0%
+Metal accuracy: 83.33333333333334%
+Classical accuracy: 83.33333333333334%
+Hiphop accuracy: 90.0%
+0.175
+Pop accuracy: 76.66666666666666%
+Jazz accuracy: 76.66666666666666%
+Metal accuracy: 83.33333333333334%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 90.0%
+0.2
+Pop accuracy: 76.66666666666666%
+Jazz accuracy: 76.66666666666666%
+Metal accuracy: 80.0%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 93.33333333333333%
+0.225
+Pop accuracy: 73.33333333333334%
+Jazz accuracy: 80.0%
+Metal accuracy: 80.0%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 93.33333333333333%
+0.25
+Pop accuracy: 70.0%
+Jazz accuracy: 80.0%
+Metal accuracy: 80.0%
+Classical accuracy: 90.0%
+Hiphop accuracy: 93.33333333333333%
+0.275
+Pop accuracy: 70.0%
+Jazz accuracy: 76.66666666666666%
+Metal accuracy: 80.0%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 93.33333333333333%
+0.3
+Pop accuracy: 70.0%
+Jazz accuracy: 76.66666666666666%
+Metal accuracy: 80.0%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 93.33333333333333%
+0.325
+Pop accuracy: 70.0%
+Jazz accuracy: 76.66666666666666%
+Metal accuracy: 80.0%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 93.33333333333333%
+0.35
+Pop accuracy: 70.0%
+Jazz accuracy: 76.66666666666666%
+Metal accuracy: 80.0%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 93.33333333333333%
+0.375
+Pop accuracy: 70.0%
+Jazz accuracy: 76.66666666666666%
+Metal accuracy: 80.0%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 93.33333333333333%
+0.4
+Pop accuracy: 73.33333333333334%
+Jazz accuracy: 73.33333333333334%
+Metal accuracy: 80.0%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 86.66666666666667%
+0.425
+Pop accuracy: 73.33333333333334%
+Jazz accuracy: 70.0%
+Metal accuracy: 80.0%
+Classical accuracy: 90.0%
+Hiphop accuracy: 86.66666666666667%
+0.45
+Pop accuracy: 66.66666666666667%
+Jazz accuracy: 70.0%
+Metal accuracy: 80.0%
+Classical accuracy: 90.0%
+Hiphop accuracy: 86.66666666666667%
+0.475
+Pop accuracy: 63.33333333333333%
+Jazz accuracy: 70.0%
+Metal accuracy: 80.0%
+Classical accuracy: 90.0%
+Hiphop accuracy: 86.66666666666667%
+0.5
+Pop accuracy: 63.33333333333333%
+Jazz accuracy: 70.0%
+Metal accuracy: 80.0%
+Classical accuracy: 90.0%
+Hiphop accuracy: 86.66666666666667%
+0.525
+Pop accuracy: 66.66666666666667%
+Jazz accuracy: 70.0%
+Metal accuracy: 80.0%
+Classical accuracy: 90.0%
+Hiphop accuracy: 86.66666666666667%
+0.55
+Pop accuracy: 63.33333333333333%
+Jazz accuracy: 63.33333333333333%
+Metal accuracy: 80.0%
+Classical accuracy: 90.0%
+Hiphop accuracy: 86.66666666666667%
+0.575
+Pop accuracy: 63.33333333333333%
+Jazz accuracy: 63.33333333333333%
+Metal accuracy: 80.0%
+Classical accuracy: 93.33333333333333%
+Hiphop accuracy: 86.66666666666667%
+0.6
+Pop accuracy: 63.33333333333333%
+Jazz accuracy: 60.0%
+Metal accuracy: 76.66666666666666%
+Classical accuracy: 90.0%
+Hiphop accuracy: 86.66666666666667%
+0.625
+Pop accuracy: 66.66666666666667%
+Jazz accuracy: 60.0%
+Metal accuracy: 76.66666666666666%
+Classical accuracy: 90.0%
+Hiphop accuracy: 86.66666666666667%
+0.65
+Pop accuracy: 70.0%
+Jazz accuracy: 56.666666666666664%
+Metal accuracy: 76.66666666666666%
+Classical accuracy: 90.0%
+Hiphop accuracy: 86.66666666666667%
+0.675
+Pop accuracy: 70.0%
+Jazz accuracy: 56.666666666666664%
+Metal accuracy: 80.0%
+Classical accuracy: 90.0%
+Hiphop accuracy: 83.33333333333334%
+0.7
+Pop accuracy: 70.0%
+Jazz accuracy: 56.666666666666664%
+Metal accuracy: 80.0%
+Classical accuracy: 86.66666666666667%
+Hiphop accuracy: 83.33333333333334%
+0.725
+Pop accuracy: 70.0%
+Jazz accuracy: 56.666666666666664%
+Metal accuracy: 80.0%
+Classical accuracy: 83.33333333333334%
+Hiphop accuracy: 83.33333333333334%
+0.75
+Pop accuracy: 70.0%
+Jazz accuracy: 56.666666666666664%
+Metal accuracy: 80.0%
+Classical accuracy: 83.33333333333334%
+Hiphop accuracy: 83.33333333333334%
+0.775
+Pop accuracy: 70.0%
+Jazz accuracy: 53.333333333333336%
+Metal accuracy: 80.0%
+Classical accuracy: 83.33333333333334%
+Hiphop accuracy: 83.33333333333334%
+0.8
+Pop accuracy: 70.0%
+Jazz accuracy: 53.333333333333336%
+Metal accuracy: 80.0%
+Classical accuracy: 83.33333333333334%
+Hiphop accuracy: 80.0%
+0.825
+Pop accuracy: 66.66666666666667%
+Jazz accuracy: 50.0%
+Metal accuracy: 80.0%
+Classical accuracy: 83.33333333333334%
+Hiphop accuracy: 80.0%
+0.85
+Pop accuracy: 66.66666666666667%
+Jazz accuracy: 50.0%
+Metal accuracy: 80.0%
+Classical accuracy: 80.0%
+Hiphop accuracy: 80.0%
+0.875
+Pop accuracy: 66.66666666666667%
+Jazz accuracy: 50.0%
+Metal accuracy: 80.0%
+Classical accuracy: 83.33333333333334%
+Hiphop accuracy: 80.0%
+0.9
+Pop accuracy: 63.33333333333333%
+Jazz accuracy: 50.0%
+Metal accuracy: 83.33333333333334%
+Classical accuracy: 83.33333333333334%
+Hiphop accuracy: 80.0%
+0.925
+Pop accuracy: 63.33333333333333%
+Jazz accuracy: 53.333333333333336%
+Metal accuracy: 83.33333333333334%
+Classical accuracy: 83.33333333333334%
+Hiphop accuracy: 76.66666666666666%

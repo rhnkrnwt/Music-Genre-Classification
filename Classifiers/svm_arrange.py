@@ -7,6 +7,8 @@ def get_data():
         lines = csv.reader(f)
         dataset = list(lines)
 
+    print(len(dataset))
+    print(len(dataset[0]))
 
     D = []
     for i in range(0,len(dataset),15):

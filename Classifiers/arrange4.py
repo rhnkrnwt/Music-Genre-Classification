@@ -7,19 +7,6 @@ def get_data():
         lines = csv.reader(f)
         F = list(lines)
 
-    """
-    half_dataset = []
-    for i in dataset:
-        half_dataset.append(i[0:750:2])
-    D = []
-    for i in range(0,len(half_dataset),15):
-        tmp1 = half_dataset[i:i+15]
-        tmp2 = [k for l in tmp1 for k in l]
-        D.append(tmp2)
-    F = [[]]*num
-    for i in range(num):
-        F[i] = D[i*100:(i+1)*100]
-    """
     for i in F:
         for k in range(len(i)):
             try:

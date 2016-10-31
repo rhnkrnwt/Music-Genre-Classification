@@ -42,6 +42,8 @@ end
 
 P = (abs(Si( 1:nhRow , :)).^2)./nRow; %periodogram based power spectrum
 
+spectralCentroid = get_sc(P);
+
 % Values from www.psbspeakers.com/Images/Audiotopics/fChart.gif
 lower = mc(lT);
 upper = mc(uT);
@@ -51,6 +53,7 @@ Mel = Mel + lower;
 
 Her = ((mcinv(Mel))./uT).*nhRow; % convert from Mel scale units to Hertz scale down range to 0 - 220
 filterbank = createFilterBank(Her');
+
 
 output = zeros(plots,nCol);
 for i = 1:nCol
@@ -66,12 +69,13 @@ P = fin';
 cv = cov(P);
 % size(cv)
 mn = mean(P);
-FINAL = zeros(1,135);
+FINAL = zeros(1,136);
 FINAL(:,1:15) = mn;
 iter = 16;
 for i = 1:15
     FINAL(1, iter:iter+15-i) = cv(i,i:15);
     iter = iter + 16 - i;
 end
+FINAL(1,136) = spectralCentroid;
 
 end

@@ -4,10 +4,9 @@
 
 % Ditermensiterons : 15 * 750 * 400
 nRow = 1;
-nCol = 135;
+nCol = 136;
 
 dataset = zeros(nRow*500,nCol); % Fiternal dataset
-
 % easily add genres, increment number of rows by 15 * 100
 genre = dir('pop/*.au');
 for iter = 1:length(genre)

@@ -5,9 +5,12 @@ from keras.layers import Dense
 from arrange import get_data
 
 A1, Y, Ate, Yte, Ate_pop, Yte_pop, Ate_jazz, Yte_jazz, Ate_metal,\
- Yte_metal, Ate_classical, Yte_classical, Ate_hiphop,\
- Yte_hip = get_data()
+Yte_metal, Ate_classical, Yte_classical, Ate_hiphop,\
+Yte_hiphop = get_data()
 
+# print(A1[A1[:, 0] < -30])
+
+np.set_printoptions(threshold=np.nan)
 A1 = preprocessing.scale(A1)
 Ate = preprocessing.scale(Ate)
 np.random.seed(7)

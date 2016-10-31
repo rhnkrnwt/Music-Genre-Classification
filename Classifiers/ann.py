@@ -2,11 +2,11 @@ import numpy as np
 from scipy.special import expit
 from sklearn import preprocessing
 from functools import reduce
-from arrange import get_data
+from total_arrange import get_data
 
 if __name__ == '__main__':
     # get training and test data
-    A1, Y, Ate, Yte = get_data()
+    A1, Y, Ate, Yte = get_data('dataset3.csv', 5, 'hot')
     A1 = preprocessing.scale(A1)
     Ate = preprocessing.scale(Ate)
 

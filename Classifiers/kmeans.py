@@ -17,8 +17,11 @@ song_p = 750
 
 
 class Song:
-	def __init__(self, song, genre_code):
-		self.data = self.parse(song)
+	def __init__(self, song_data, genre_code, dataParsed):
+		if not dataParsed:
+			self.data = self.parse(song_data)
+		else:
+			self.data = song_data
 		self.genre = genre_code
 		self.cluster = None
 		self.mean = np.mean(self.data, axis=1)
@@ -31,17 +34,17 @@ class Song:
 		# self.data_trans = self.data.T
 		self.cov_inv = linalg.inv(self.cov)
 
-	def zero_out(self):
+	def reinit(self):
 		self.data = self.data * 0
 		self.mean = self.mean * 0
 		self.cov = self.cov * 0
 	
-	def parse(self, song):
-		for i in range(len(song)):
-			song[i] = song[i].split(",")
-			for j in range(len(song[i])):
-				song[i][j] = float(song[i][j])
-		return np.array(song)
+	def parse(self, song_data):
+		for i in range(len(song_data)):
+			song_data[i] = song_data[i].split(",")
+			for j in range(len(song_data[i])):
+				song_data[i][j] = float(song_data[i][j])
+		return np.array(song_data)
 
 def KL_divergence(song1, song2):
 	# Skipped the log(det(sample.cov_inv)/det(test.sample.cov_inv)) coz core purpose is to calculate distance not 
@@ -52,48 +55,59 @@ def KL_divergence(song1, song2):
 	dist +=  temp.T.dot(song2.cov_inv).dot(temp)
 	return abs(dist/2)
 
-def Kmeans(epochs):
-	#1
-	song_centroid = [None]*len(genre)
-	for i in range(len(genre)):
-		temp = int(randint(i * genre_delim, (i + 1) * genre_delim - 1)/song_n)
-		# print(temp)
-		song_centroid[i] = songs[temp]
-		song_centroid[i].cluster = i
-	distance = [0]*len(genre)
-	#2
-	while epochs:
-		for song in songs:
+def checkThresh(deltaMean):
+
+	meanThresh = 0.95 * np.ones(song_n)
+	for i in range(len(genre)): 
+		for j in range(song_n):
+			if meanThresh[j] > abs(deltaMean[i][j]):
+				return True
+	return False
+
+
+def Kmeans(testLoopSize):
+	deltaMean = [None] * len(genre)
+	# deltaCov = [None] * len(genre)
+	total = np.zeros((len(genre), len(genre)))
+	song_centroid = []
+	for loopCounter in range(testLoopSize):
+		for i in range(len(genre)):
+			temp = int(randint(i * len(songs)/len(genre), (i + 1) * len(songs)/len(genre) - 1))
+			song_centroid.append(Song(songs[temp].data, i, True))
+			song_centroid[i].cluster = i
+		distance = [0]*len(genre)
+
+		loop = True
+		while loop:
+			for song in songs:
+				for i in range(len(genre)):
+					distance[i] = KL_divergence(song_centroid[i], song) + KL_divergence(song, song_centroid[i])
+				song.cluster = distance.index(min(distance))
+
 			for i in range(len(genre)):
-				distance[i] = KL_divergence(song_centroid[i], song) + KL_divergence(song, song_centroid[i])
-			song.cluster = distance.index(min(distance))
+				deltaMean[i] = song_centroid[i].mean
+				song_centroid[i].reinit()
+			
+			counter = [0]*len(genre)
+			
+			for song in songs:
+				song_centroid[song.cluster].mean += song.mean
+				song_centroid[song.cluster].cov += song.cov
+				counter[song.cluster] += 1
 
-		counter = [0]*len(genre)
+			for i in range(len(genre)):
+				song_centroid[i].mean /= counter[i]
+				song_centroid[i].cov /= counter[i]
+				for j in range(len(song_centroid[i].mean)):
+					deltaMean[i][j] = deltaMean[i][j]/song_centroid[i].mean[j]
+				try:
+					song_centroid[i].calculate()
+				except:
+					print('Error in Classification')
+			loop = checkThresh(deltaMean)
 		for song in songs:
-			counter[song.cluster] += 1
-
-		for i in range(len(genre)):
-			print(counter[i], end=' ')
-		
-		for i in range(len(genre)):
-			# print(song_centroid[i].mean, end=' ')
-			song_centroid[i].zero_out()
-		
-		print()
-		# print("Updating centroid : ")
-		
-		for song in songs:
-			song_centroid[song.cluster].mean += song.mean
-			song_centroid[song.cluster].cov += song.cov
-
-		for i in range(len(genre)):
-			song_centroid[i].mean *= song_n / genre_delim
-			song_centroid[i].cov *= song_n / genre_delim
-			# print(song_centroid[i].cov)
-			song_centroid[i].calculate()
-		epochs-=1
-	
-
+			total[song.genre][song.cluster] += 1
+	print(total/testLoopSize)
 	
 
 if __name__ == '__main__':
@@ -107,6 +121,9 @@ if __name__ == '__main__':
 	finally:
 		f.close() 
 	for i in range(0, len(mfcc), song_n):
-		songs.append(Song(mfcc[i : i + song_n], int(i/genre_delim)))
+		songs.append(Song(mfcc[i : i + song_n], int(i/genre_delim), False))
 	print("Starting Clustering...")
-	Kmeans(2)
+	
+	
+	#Kmeans function takes in one parameter and that is number of instances over which observations should be averaged upon.
+	Kmeans(10)

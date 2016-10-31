@@ -6,7 +6,7 @@ def get_data():
     with open('../Data/dataset4.csv', 'r') as f:
         lines = csv.reader(f)
         F = list(lines)
-    
+
     for i in F:
         for k in range(len(i)):
             try:

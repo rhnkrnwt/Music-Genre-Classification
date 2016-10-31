@@ -43,7 +43,10 @@ def get_results(A):
         res[r] += 1
     return res
 
-def make_tree(A):
+def make_tree(A, max_depth=None):
+
+    if max_depth is not None and max_depth < 1:
+        return dnode(result=get_results(A))
     if A.shape[0] == 0:
         return dnode()
     c_score = entropy(A)
@@ -85,8 +88,14 @@ def make_tree(A):
 
     if max_gain > 0:
         print("Best criteria: {0}".format(best_criteria))
-        true_branch = make_tree(best_divide[0])
-        false_branch = make_tree(best_divide[1])
+        true_branch = None
+        false_branch = None
+        if max_depth is None:
+            true_branch = make_tree(best_divide[0])
+            false_branch = make_tree(best_divide[1])
+        else:
+            true_branch = make_tree(best_divide[0], max_depth - 1)
+            false_branch = make_tree(best_divide[1], max_depth - 1)
         return dnode(feature=best_criteria[0], val=best_criteria[1],
                      tb=true_branch, fb=false_branch)
     return dnode(result=get_results(A))
@@ -124,13 +133,23 @@ if __name__ == '__main__':
     Y = Y.reshape(-1, 1)
     A = np.concatenate((A, Y), axis=1)
 
-    # tree = make_tree(A)
-    #with open('d_tree.pickle', 'wb') as f:
-    #    pickle.dump(tree, f)
+    # tree = make_tree(A, 3)
+    # with open('d_tree.pickle', 'wb') as f:
+    #     pickle.dump(tree, f)
     tree = None
-    with open('d_tree.pickle', 'rb') as f:
+    with open('orig_tree.pickle', 'rb') as f:
         tree = pickle.load(f)
 
     printtree(tree)
-    print(classify_one(Ate[0, :], tree))
-    print(Yte[0])
+    for i in range(Ate.shape[0]):
+        pred = (classify_one(Ate[i, :], tree))
+        print(pred, Yte[i])
+        # for key, _ in pred.items():
+            # print("{0} {1}".format(int(key), Yte[i]))
+            # if int(key) == Yte[i]:
+            #     tru += 1
+            #     print(key)
+    # print(tru / Ate.shape[0])
+
+    # print(classify_one(Ate[0, :], tree))
+    # print(Yte[0])

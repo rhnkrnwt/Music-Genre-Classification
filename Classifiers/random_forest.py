@@ -3,6 +3,7 @@ import sys
 from sklearn.ensemble import RandomForestClassifier
 from arrange_dt4 import get_data
 
+
 def rf(md, A, Y, Ate, Yte):
     clf = RandomForestClassifier(max_depth=md, n_jobs=1, n_estimators=400)
     clf.fit(A, Y)

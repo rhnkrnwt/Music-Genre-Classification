@@ -4,10 +4,9 @@
 
 % Ditermensiterons : 15 * 750 * 400
 nRow = 1;
-nCol = 135;
+nCol = 136;
 
-dataset = zeros(nRow*400,nCol); % Fiternal dataset
-
+dataset = zeros(nRow*500,nCol); % Fiternal dataset
 % easily add genres, increment number of rows by 15 * 100
 genre = dir('pop/*.au');
 for iter = 1:length(genre)
@@ -16,15 +15,23 @@ end
 
 genre = dir('jazz/*.au');
 for iter = 1:length(genre)
-    dataset(101 + iter,:) = mfcc('jazz',genre(iter).name);
+    dataset(100 + iter,:) = mfcc('jazz',genre(iter).name);
 end
 
 genre = dir('metal/*.au');
 for iter = 1:length(genre)
-    dataset(201 + iter,:) = mfcc('metal',genre(iter).name);
+    dataset(200 + iter,:) = mfcc('metal',genre(iter).name);
 end
 
 genre = dir('classical/*.au');
 for iter = 1:length(genre)
-    dataset(301 + iter,:) = mfcc('classical', genre(iter).name);
+    dataset(300 + iter,:) = mfcc('classical', genre(iter).name);
 end
+
+genre = dir('hiphop/*.au');
+for iter = 1:length(genre)
+    dataset(400 + iter,:) = mfcc('hiphop', genre(iter).name);
+end
+
+
+principal_data = red_dim(dataset);

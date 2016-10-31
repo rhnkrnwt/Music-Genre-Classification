@@ -7,7 +7,8 @@ cd ..
 % ------------------ %
 
 % initialise variables
-totalSeconds = 25; % consider first < ** > seconds of sample from the 30ish seconds to avoid errors with shorter samples
+totalSeconds = 25; % consider first < ** > seconds of sample from the
+                   % 30ish seconds to avoid errors with shorter samples
 startTime = 8; % obtain middle 50% : 15 seconds
 endTime = 23;
 nCol = 375; % number of frames
@@ -22,13 +23,16 @@ Y = Y(1:Fs*totalSeconds,:);
 Fs = Fs/2;
 Y = Y(1:2:size(Y,1),:);
 X = Y(startTime*Fs:endTime*Fs,:); % taking middle 50% of the sample
-n = Fs / 50; % number of samples in a frame of 20ms = 1000/20
+n = round(Fs / 50); % number of samples in a frame of 20ms = 1000/20
 S = zeros(n,nCol); % 750 is the number of frames
+
 for k = 0:nCol-1
     S(:, k+1) = X(1+n*k:n*(k+1),:);
-end 
+end
 
-H = repmat(hamming(nRow),[1, nCol]); % hamming window for signal smoothening
+H = repmat(hamming(1+nhRow),[1, nCol]); % hamming window for signal smoothening
+
+
 smooth_S = S .* H;
 
 Si = zeros(size(smooth_S));
@@ -37,6 +41,8 @@ for k = 1:nCol
 end
 
 P = (abs(Si( 1:nhRow , :)).^2)./nRow; %periodogram based power spectrum
+
+spectralCentroid = get_sc(P);
 
 % Values from www.psbspeakers.com/Images/Audiotopics/fChart.gif
 lower = mc(lT);
@@ -47,6 +53,7 @@ Mel = Mel + lower;
 
 Her = ((mcinv(Mel))./uT).*nhRow; % convert from Mel scale units to Hertz scale down range to 0 - 220
 filterbank = createFilterBank(Her');
+
 
 output = zeros(plots,nCol);
 for i = 1:nCol
@@ -60,15 +67,15 @@ end
 fin = output(1:15,:);
 P = fin';
 cv = cov(P);
+% size(cv)
 mn = mean(P);
-
-FINAL = zeros(1,135);
+FINAL = zeros(1,136);
 FINAL(:,1:15) = mn;
 iter = 16;
 for i = 1:15
-    num = size(cv(i,i:15), 2);
-    FINAL(iter:iter+num-1)
-    iter = iter + num;
+    FINAL(1, iter:iter+15-i) = cv(i,i:15);
+    iter = iter + 16 - i;
 end
+FINAL(1,136) = spectralCentroid;
 
 end

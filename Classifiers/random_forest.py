@@ -16,17 +16,17 @@ if __name__ == '__main__':
     prediction = rf(int(sys.argv[1]), A, Y, Ate, Yte)
 
     class_counter = 0
-    mis = [0, 0, 0, 0]
+    mis = [0, 0, 0, 0, 0]
     for p in prediction:
         if class_counter != p:
             mis[class_counter] += 1
 
         class_counter += 1
-        if class_counter == 4:
+        if class_counter == 5:
             class_counter = 0
 
     print("Pop accuracy: {0}%".format((1 - (mis[0]) / 30) * 100))
     print("Jazz accuracy: {0}%".format((1 - (mis[1]) / 30) * 100))
     print("Metal accuracy: {0}%".format((1 - (mis[2]) / 30) * 100))
     print("Classical accuracy: {0}%".format((1 - (mis[3]) / 30) * 100))
-    #print("Hiphop accuracy: {0}%".format((1 - (mis[4]) / 30) * 100))
+    print("Hiphop accuracy: {0}%".format((1 - (mis[4]) / 30) * 100))

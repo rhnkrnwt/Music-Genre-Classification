@@ -6,12 +6,12 @@ from decision_tree import make_tree, classify_one
 
 def gen_tree(A, n):
     for i in range(n):
-        print(A.shape[0])
+        # print(A.shape[0])
         As = A[np.random.choice(A.shape[0], 200, replace=False), :]
-        print(As.shape)
+        #print(As.shape)
 
         tree = make_tree(As)
-        with open('./forest/d_tree' + str(20 + i) + '.pickle', 'wb') as f:
+        with open('./forest/d_tree' + str(718 + i) + '.pickle', 'wb') as f:
             pickle.dump(tree, f)
 
 def combine(Ate, Yte, num_trees, num_class):
@@ -35,7 +35,7 @@ def combine(Ate, Yte, num_trees, num_class):
         if pr == Yte[i]:
             tru += 1
 
-    print(tru / Ate.shape[0])
+    return tru / Ate.shape[0]
 
 
 
@@ -43,7 +43,9 @@ def rf():
     A, Y, Ate, Yte = get_data('dataset4.csv', num=5)
     Y = Y.reshape(-1, 1)
     A = np.concatenate((A, Y), axis=1)
-    gen_tree(A, 200)
-    # combine(Ate, Yte, 20, 5)
+    # gen_tree(A, 50)
+    maxi = 0.0
+    t = combine(Ate, Yte, 604, 5)
 
+    print("Overall accuracy: {0} %".format(t * 100))
 rf()

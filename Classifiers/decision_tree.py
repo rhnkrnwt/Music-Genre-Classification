@@ -66,7 +66,7 @@ def make_tree(A, max_depth=None):
 
 
         i = float(inc[feat])
-        print(feat)
+        #print(feat)
         if i == 0:
             continue
         slices = abs(int((stop - start) / i))
@@ -87,7 +87,7 @@ def make_tree(A, max_depth=None):
                     best_divide = sets
 
     if max_gain > 0:
-        print("Best criteria: {0}".format(best_criteria))
+        #print("Best criteria: {0}".format(best_criteria))
         true_branch = None
         false_branch = None
         if max_depth is None:
@@ -136,20 +136,21 @@ if __name__ == '__main__':
     # with open('d_tree.pickle', 'wb') as f:
     #     pickle.dump(tree, f)
     tree = None
-    with open('forest/d_tree0.pickle', 'rb') as f:
+    with open('orig_tree.pickle', 'rb') as f:
         tree = pickle.load(f)
 
-    print_tree(tree)
+    # print_tree(tree)
     tru = 0
     for i in range(Ate.shape[0]):
         pred = (classify_one(Ate[i, :], tree))
-        print(pred, Yte[i])
+        # print(pred, Yte[i])
         for key, _ in pred.items():
-            print("{0} {1}".format(int(key), Yte[i]))
+            # print("{0} {1}".format(int(key), Yte[i]))
             if int(key) == Yte[i]:
                 tru += 1
-                print(key)
-    print(tru / Ate.shape[0])
+                # print(key)
+    t = tru / Ate.shape[0]
+    print("Overall accuracy: {0} %".format(t * 100))
 
     # print(classify_one(Ate[0, :], tree))
     # print(Yte[0])

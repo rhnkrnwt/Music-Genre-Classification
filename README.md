@@ -1,6 +1,7 @@
 ## Music Genre Classification  
 
-### IIIT Hyderabad Course Project: SMAI  
+### Documentation / Report:
+- [Link](https://docs.google.com/document/d/139sIVK9Uw44oeu34jD2pJVnGpIkxlq0wmI487oDciPY/edit?usp=sharing)
 
 ### Instructions  
 
